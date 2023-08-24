@@ -1,9 +1,6 @@
-const balance = document.getElementById("balance")
-const money_plus = document.getElementById("money-plus")
-const money_minus = document.getElementById("money-minus")
-const form = document.getElementById("form")
-const text = document.getElementById("text")
-const amount = document.getElementById("amount")
+var form = document.getElementById("form")
+var text = document.getElementById("text")
+var amount = document.getElementById("amount")
 
 
 const dataTransaction=[
@@ -18,6 +15,7 @@ const transaction=dataTransaction;
 
 function init(){
     transaction.forEach(adddataTolist);
+    CalculateMoney(transaction);
 }
 
 function adddataTolist(transaction){
@@ -36,6 +34,26 @@ function adddataTolist(transaction){
         }
       });
       
+}
+
+function CalculateMoney(transaction){
+    const amounts = transaction.map(transaction=>transaction.amount)
+    //คำนวนยอดคงเหลือ
+    const total = amounts.reduce((resuft,item)=>(resuft+=item),0).toFixed(2);
+    //คำนวณรายรับ
+    const income = amounts.filter(item=>item>0).reduce((resuft,item)=>(resuft+=item),0).toFixed(2);
+    //คำนวณรายจ่าย
+    const expense = amounts.filter(item=>item<0).reduce((resuft,item)=>(resuft+=item),0).toFixed(2);
+    
+    //แสดงผลทางหน้าจอ
+    document.addEventListener("DOMContentLoaded", function() {
+    var balance = document.getElementById("balance")
+    var money_plus = document.getElementById("money-plus")
+    var money_minus = document.getElementById("money-minus")
+    balance.innerText=`${total}`;
+    money_plus.innerText=`${income}`
+    money_minus.innerText=`${expense}`
+    })
 }
 
 init();
