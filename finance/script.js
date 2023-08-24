@@ -27,13 +27,19 @@ function adddataTolist(transaction){
         if (List !== null) {
           var Item = document.createElement("li");
           Item.classList.add(status)
-          Item.innerHTML = `${transaction.text}<span>${symbol}${Math.abs(transaction.amount)}</span><button class="delete-btn">x</button>`;
+          Item.innerHTML = `${transaction.text}<span>${symbol}${formatNumber(Math.abs(transaction.amount))}</span><button class="delete-btn">x</button>`;
             List.appendChild(Item);
         } else {
           console.error("Error Element with ID 'list' not found.");
         }
       });
       
+}
+
+//filter comma
+function formatNumber(num){
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+
 }
 
 function CalculateMoney(transaction){
@@ -50,9 +56,9 @@ function CalculateMoney(transaction){
     var balance = document.getElementById("balance")
     var money_plus = document.getElementById("money-plus")
     var money_minus = document.getElementById("money-minus")
-    balance.innerText=`${total}`;
-    money_plus.innerText=`${income}`
-    money_minus.innerText=`${expense}`
+    balance.innerText=`฿`+formatNumber(total);
+    money_plus.innerText=`฿`+formatNumber(income);
+    money_minus.innerText=`฿`+formatNumber(expense);
     })
 }
 
