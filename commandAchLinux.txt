@@ -1,0 +1,14 @@
+AchLinux
+//swith langues 
+setxkbmap -option grp:switch,grp:alt_shift_toggle,grp_led:­scroll us,th
+
+
+
+//user ui
+sudo pacman -S lightdm-gtk-greeter-settings
+
+
+
+zsh <(curl -s https://raw.githubusercontent.com/zap-zsh/zap/master/install.zsh) --branch release-v1
+sudo usermod -s /bin/zsh $USER
+.zshrc
