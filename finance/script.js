@@ -1,4 +1,4 @@
-var form = document.getElementById("form")
+var form = document.querySelector("form")
 var text = document.getElementById("text")
 var amount = document.getElementById("amount")
 
@@ -61,5 +61,12 @@ function CalculateMoney(transaction){
     money_minus.innerText=`฿`+formatNumber(expense);
     })
 }
-
+function logSubmit(event) {
+    log.textContent = `Form Submitted! Timestamp: ${event.timeStamp}`;
+    event.preventDefault();
+  }
+  
+ 
+  
+  form?.addEventListener("submit", logSubmit);
 init();
